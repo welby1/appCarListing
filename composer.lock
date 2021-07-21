@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "445b2b56036f4fb3c253035674db75e4",
+    "content-hash": "62fae3f253a483f3763fd085a4bc8954",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -61,6 +61,56 @@
                 "source": "https://github.com/asm89/stack-cors/tree/v2.0.3"
             },
             "time": "2021-03-11T06:42:03+00:00"
+        },
+        {
+            "name": "bluemmb/faker-picsum-photos-provider",
+            "version": "v2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bluemmb/Faker-PicsumPhotos.git",
+                "reference": "ba51696f7f2e8ad1e7d45703ad845304b6e66a2d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bluemmb/Faker-PicsumPhotos/zipball/ba51696f7f2e8ad1e7d45703ad845304b6e66a2d",
+                "reference": "ba51696f7f2e8ad1e7d45703ad845304b6e66a2d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "fakerphp/faker": "^1.10",
+                "php": "^7.1 || ^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Bluemmb\\Faker\\": "."
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mohammad Eftekhari",
+                    "email": "bluemmb22@gmail.com"
+                }
+            ],
+            "description": "picsum.photos provider for Faker",
+            "keywords": [
+                "faker",
+                "picsum.photos",
+                "provider"
+            ],
+            "support": {
+                "issues": "https://github.com/bluemmb/Faker-PicsumPhotos/issues",
+                "source": "https://github.com/bluemmb/Faker-PicsumPhotos/tree/v2.0"
+            },
+            "time": "2021-02-02T13:59:04+00:00"
         },
         {
             "name": "brick/math",
@@ -421,6 +471,71 @@
                 }
             ],
             "time": "2020-12-29T14:50:06+00:00"
+        },
+        {
+            "name": "fakerphp/faker",
+            "version": "v1.15.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FakerPHP/Faker.git",
+                "reference": "89c6201c74db25fa759ff16e78a4d8f32547770e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/89c6201c74db25fa759ff16e78a4d8f32547770e",
+                "reference": "89c6201c74db25fa759ff16e78a4d8f32547770e",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1 || ^8.0",
+                "psr/container": "^1.0",
+                "symfony/deprecation-contracts": "^2.2"
+            },
+            "conflict": {
+                "fzaninotto/faker": "*"
+            },
+            "require-dev": {
+                "bamarni/composer-bin-plugin": "^1.4.1",
+                "ext-intl": "*",
+                "symfony/phpunit-bridge": "^4.4 || ^5.2"
+            },
+            "suggest": {
+                "ext-curl": "Required by Faker\\Provider\\Image to download images.",
+                "ext-dom": "Required by Faker\\Provider\\HtmlLorem for generating random HTML.",
+                "ext-iconv": "Required by Faker\\Provider\\ru_RU\\Text::realText() for generating real Russian text.",
+                "ext-mbstring": "Required for multibyte Unicode string functionality."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "v1.15-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Faker\\": "src/Faker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François Zaninotto"
+                }
+            ],
+            "description": "Faker is a PHP library that generates fake data for you.",
+            "keywords": [
+                "data",
+                "faker",
+                "fixtures"
+            ],
+            "support": {
+                "issues": "https://github.com/FakerPHP/Faker/issues",
+                "source": "https://github.com/FakerPHP/Faker/tree/v1.15.0"
+            },
+            "time": "2021-07-06T20:39:40+00:00"
         },
         {
             "name": "fideloper/proxy",
@@ -1715,6 +1830,57 @@
                 "source": "https://github.com/opis/closure/tree/3.6.2"
             },
             "time": "2021-04-09T13:42:10+00:00"
+        },
+        {
+            "name": "pelmered/fake-car",
+            "version": "1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pelmered/fake-car.git",
+                "reference": "b66ad589cdd9c5458653d88bfd3de4d16cd3be6e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pelmered/fake-car/zipball/b66ad589cdd9c5458653d88bfd3de4d16cd3be6e",
+                "reference": "b66ad589cdd9c5458653d88bfd3de4d16cd3be6e",
+                "shasum": ""
+            },
+            "require": {
+                "fakerphp/faker": "^1.10",
+                "php": "^7.3||^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Faker\\Provider\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Peter Elmered",
+                    "email": "peter@elmered.com"
+                }
+            ],
+            "description": "Fake-Car is a Faker provider that generates fake car data for you.",
+            "keywords": [
+                "car",
+                "car-faker",
+                "fake-car",
+                "faker",
+                "vehicle"
+            ],
+            "support": {
+                "issues": "https://github.com/pelmered/fake-car/issues",
+                "source": "https://github.com/pelmered/fake-car/tree/1.6"
+            },
+            "time": "2020-12-03T10:00:23+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -4945,6 +5111,56 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.10.0"
             },
             "time": "2021-03-09T10:59:23+00:00"
+        },
+        {
+            "name": "xvladqt/faker-lorem-flickr",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xvladxtremal/Faker-LoremFlickr.git",
+                "reference": "ed4b8c2892b873b9c4949829c8b6f760827f97f4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xvladxtremal/Faker-LoremFlickr/zipball/ed4b8c2892b873b9c4949829c8b6f760827f97f4",
+                "reference": "ed4b8c2892b873b9c4949829c8b6f760827f97f4",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "fakerphp/faker": "~1",
+                "php": "^5.4 || ^7.0 || ^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Xvladqt\\Faker\\": "."
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vladyslav Volynets",
+                    "email": "xvladxtreme@gmail.com"
+                }
+            ],
+            "description": "loremflickr.com provider for Faker",
+            "keywords": [
+                "faker",
+                "loremflickr.com",
+                "provider"
+            ],
+            "support": {
+                "issues": "https://github.com/xvladxtremal/Faker-LoremFlickr/issues",
+                "source": "https://github.com/xvladxtremal/Faker-LoremFlickr/tree/v1.0.0"
+            },
+            "time": "2021-01-18T02:03:35+00:00"
         }
     ],
     "packages-dev": [
@@ -5210,71 +5426,6 @@
                 "source": "https://github.com/facade/ignition-contracts/tree/1.0.2"
             },
             "time": "2020-10-16T08:27:54+00:00"
-        },
-        {
-            "name": "fakerphp/faker",
-            "version": "v1.15.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/FakerPHP/Faker.git",
-                "reference": "89c6201c74db25fa759ff16e78a4d8f32547770e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/89c6201c74db25fa759ff16e78a4d8f32547770e",
-                "reference": "89c6201c74db25fa759ff16e78a4d8f32547770e",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1 || ^8.0",
-                "psr/container": "^1.0",
-                "symfony/deprecation-contracts": "^2.2"
-            },
-            "conflict": {
-                "fzaninotto/faker": "*"
-            },
-            "require-dev": {
-                "bamarni/composer-bin-plugin": "^1.4.1",
-                "ext-intl": "*",
-                "symfony/phpunit-bridge": "^4.4 || ^5.2"
-            },
-            "suggest": {
-                "ext-curl": "Required by Faker\\Provider\\Image to download images.",
-                "ext-dom": "Required by Faker\\Provider\\HtmlLorem for generating random HTML.",
-                "ext-iconv": "Required by Faker\\Provider\\ru_RU\\Text::realText() for generating real Russian text.",
-                "ext-mbstring": "Required for multibyte Unicode string functionality."
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "v1.15-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Faker\\": "src/Faker/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "François Zaninotto"
-                }
-            ],
-            "description": "Faker is a PHP library that generates fake data for you.",
-            "keywords": [
-                "data",
-                "faker",
-                "fixtures"
-            ],
-            "support": {
-                "issues": "https://github.com/FakerPHP/Faker/issues",
-                "source": "https://github.com/FakerPHP/Faker/tree/v1.15.0"
-            },
-            "time": "2021-07-06T20:39:40+00:00"
         },
         {
             "name": "filp/whoops",
