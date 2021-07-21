@@ -13,4 +13,16 @@ class City extends Model
         'name',
         'country_id'
     ];
+
+    public function users(){
+        return $this->hasMany(User::class);
+    }
+
+    public function country(){
+        return $this->belongsTo(Country::class);
+    }
+
+    public function cars(){
+        return $this->hasManyThrough(Car::class, User::class);
+    }
 }
