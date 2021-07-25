@@ -14,8 +14,8 @@ class AddColumnsToUserTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('phone_number', 30)->after('name');
-            $table->foreignId('city_id')->after('phone_number');
+            $table->string('phone_number', 30)->nullable()->after('name');
+            $table->foreignId('city_id')->nullable()->after('phone_number');
             $table->foreign('city_id')->references('id')->on('cities')->onUpdate('cascade');
         });
     }
