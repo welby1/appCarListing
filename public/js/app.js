@@ -1985,11 +1985,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -43784,70 +43779,68 @@ var render = function() {
             ),
             _vm._v(" "),
             _vm._l(_vm.filters.body, function(filter, index) {
-              return _c("div", { staticClass: "flex items-start" }, [
-                _c("div", { staticClass: "flex items-center h-5" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.selects.body,
-                        expression: "selects.body"
-                      }
-                    ],
-                    staticClass:
-                      "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded",
-                    attrs: { id: "filter" + index, type: "checkbox" },
-                    domProps: {
-                      value: filter.body_type,
-                      checked: Array.isArray(_vm.selects.body)
-                        ? _vm._i(_vm.selects.body, filter.body_type) > -1
-                        : _vm.selects.body
-                    },
-                    on: {
-                      change: function($event) {
-                        var $$a = _vm.selects.body,
-                          $$el = $event.target,
-                          $$c = $$el.checked ? true : false
-                        if (Array.isArray($$a)) {
-                          var $$v = filter.body_type,
-                            $$i = _vm._i($$a, $$v)
-                          if ($$el.checked) {
-                            $$i < 0 &&
-                              _vm.$set(_vm.selects, "body", $$a.concat([$$v]))
+              return _c(
+                "div",
+                { key: "filter_body" + index, staticClass: "flex items-start" },
+                [
+                  _c("div", { staticClass: "flex items-center h-5" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.selects.body,
+                          expression: "selects.body"
+                        }
+                      ],
+                      staticClass:
+                        "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded",
+                      attrs: { id: "filter_body" + index, type: "checkbox" },
+                      domProps: {
+                        value: filter.body_type,
+                        checked: Array.isArray(_vm.selects.body)
+                          ? _vm._i(_vm.selects.body, filter.body_type) > -1
+                          : _vm.selects.body
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$a = _vm.selects.body,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = filter.body_type,
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 &&
+                                _vm.$set(_vm.selects, "body", $$a.concat([$$v]))
+                            } else {
+                              $$i > -1 &&
+                                _vm.$set(
+                                  _vm.selects,
+                                  "body",
+                                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                )
+                            }
                           } else {
-                            $$i > -1 &&
-                              _vm.$set(
-                                _vm.selects,
-                                "body",
-                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                              )
+                            _vm.$set(_vm.selects, "body", $$c)
                           }
-                        } else {
-                          _vm.$set(_vm.selects, "body", $$c)
                         }
                       }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "ml-3 text-sm" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "font-medium text-gray-700",
-                      attrs: { for: "filter" + index }
-                    },
-                    [
-                      _vm._v(
-                        "\n                            " +
-                          _vm._s(filter.body_type) +
-                          "\n                        "
-                      )
-                    ]
-                  )
-                ])
-              ])
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "ml-3 text-sm" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "font-medium text-gray-700",
+                        attrs: { for: "filter_body" + index }
+                      },
+                      [_vm._v(_vm._s(filter.body_type))]
+                    )
+                  ])
+                ]
+              )
             }),
             _vm._v(" "),
             _c(
@@ -43857,70 +43850,68 @@ var render = function() {
             ),
             _vm._v(" "),
             _vm._l(_vm.filters.fuel, function(filter, index) {
-              return _c("div", { staticClass: "flex items-start" }, [
-                _c("div", { staticClass: "flex items-center h-5" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.selects.fuel,
-                        expression: "selects.fuel"
-                      }
-                    ],
-                    staticClass:
-                      "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded",
-                    attrs: { id: "filter" + index, type: "checkbox" },
-                    domProps: {
-                      value: filter.fuel_type,
-                      checked: Array.isArray(_vm.selects.fuel)
-                        ? _vm._i(_vm.selects.fuel, filter.fuel_type) > -1
-                        : _vm.selects.fuel
-                    },
-                    on: {
-                      change: function($event) {
-                        var $$a = _vm.selects.fuel,
-                          $$el = $event.target,
-                          $$c = $$el.checked ? true : false
-                        if (Array.isArray($$a)) {
-                          var $$v = filter.fuel_type,
-                            $$i = _vm._i($$a, $$v)
-                          if ($$el.checked) {
-                            $$i < 0 &&
-                              _vm.$set(_vm.selects, "fuel", $$a.concat([$$v]))
+              return _c(
+                "div",
+                { key: "filter_fuel" + index, staticClass: "flex items-start" },
+                [
+                  _c("div", { staticClass: "flex items-center h-5" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.selects.fuel,
+                          expression: "selects.fuel"
+                        }
+                      ],
+                      staticClass:
+                        "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded",
+                      attrs: { id: "filter_fuel" + index, type: "checkbox" },
+                      domProps: {
+                        value: filter.fuel_type,
+                        checked: Array.isArray(_vm.selects.fuel)
+                          ? _vm._i(_vm.selects.fuel, filter.fuel_type) > -1
+                          : _vm.selects.fuel
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$a = _vm.selects.fuel,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = filter.fuel_type,
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 &&
+                                _vm.$set(_vm.selects, "fuel", $$a.concat([$$v]))
+                            } else {
+                              $$i > -1 &&
+                                _vm.$set(
+                                  _vm.selects,
+                                  "fuel",
+                                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                )
+                            }
                           } else {
-                            $$i > -1 &&
-                              _vm.$set(
-                                _vm.selects,
-                                "fuel",
-                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                              )
+                            _vm.$set(_vm.selects, "fuel", $$c)
                           }
-                        } else {
-                          _vm.$set(_vm.selects, "fuel", $$c)
                         }
                       }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "ml-3 text-sm" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "font-medium text-gray-700",
-                      attrs: { for: "filter" + index }
-                    },
-                    [
-                      _vm._v(
-                        "\n                            " +
-                          _vm._s(filter.fuel_type) +
-                          "\n                        "
-                      )
-                    ]
-                  )
-                ])
-              ])
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "ml-3 text-sm" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "font-medium text-gray-700",
+                        attrs: { for: "filter_fuel" + index }
+                      },
+                      [_vm._v(_vm._s(filter.fuel_type))]
+                    )
+                  ])
+                ]
+              )
             }),
             _vm._v(" "),
             _c(
@@ -43930,77 +43921,81 @@ var render = function() {
             ),
             _vm._v(" "),
             _vm._l(_vm.filters.transmission, function(filter, index) {
-              return _c("div", { staticClass: "flex items-start" }, [
-                _c("div", { staticClass: "flex items-center h-5" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.selects.transmission,
-                        expression: "selects.transmission"
-                      }
-                    ],
-                    staticClass:
-                      "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded",
-                    attrs: { id: "filter" + index, type: "checkbox" },
-                    domProps: {
-                      value: filter.transmission_type,
-                      checked: Array.isArray(_vm.selects.transmission)
-                        ? _vm._i(
-                            _vm.selects.transmission,
-                            filter.transmission_type
-                          ) > -1
-                        : _vm.selects.transmission
-                    },
-                    on: {
-                      change: function($event) {
-                        var $$a = _vm.selects.transmission,
-                          $$el = $event.target,
-                          $$c = $$el.checked ? true : false
-                        if (Array.isArray($$a)) {
-                          var $$v = filter.transmission_type,
-                            $$i = _vm._i($$a, $$v)
-                          if ($$el.checked) {
-                            $$i < 0 &&
-                              _vm.$set(
-                                _vm.selects,
-                                "transmission",
-                                $$a.concat([$$v])
-                              )
+              return _c(
+                "div",
+                {
+                  key: "filter_transmission" + index,
+                  staticClass: "flex items-start"
+                },
+                [
+                  _c("div", { staticClass: "flex items-center h-5" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.selects.transmission,
+                          expression: "selects.transmission"
+                        }
+                      ],
+                      staticClass:
+                        "focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded",
+                      attrs: {
+                        id: "filter_transmission" + index,
+                        type: "checkbox"
+                      },
+                      domProps: {
+                        value: filter.transmission_type,
+                        checked: Array.isArray(_vm.selects.transmission)
+                          ? _vm._i(
+                              _vm.selects.transmission,
+                              filter.transmission_type
+                            ) > -1
+                          : _vm.selects.transmission
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$a = _vm.selects.transmission,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = filter.transmission_type,
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 &&
+                                _vm.$set(
+                                  _vm.selects,
+                                  "transmission",
+                                  $$a.concat([$$v])
+                                )
+                            } else {
+                              $$i > -1 &&
+                                _vm.$set(
+                                  _vm.selects,
+                                  "transmission",
+                                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                )
+                            }
                           } else {
-                            $$i > -1 &&
-                              _vm.$set(
-                                _vm.selects,
-                                "transmission",
-                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                              )
+                            _vm.$set(_vm.selects, "transmission", $$c)
                           }
-                        } else {
-                          _vm.$set(_vm.selects, "transmission", $$c)
                         }
                       }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "ml-3 text-sm" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "font-medium text-gray-700",
-                      attrs: { for: "filter" + index }
-                    },
-                    [
-                      _vm._v(
-                        "\n                            " +
-                          _vm._s(filter.transmission_type) +
-                          "\n                        "
-                      )
-                    ]
-                  )
-                ])
-              ])
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "ml-3 text-sm" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "font-medium text-gray-700",
+                        attrs: { for: "filter_transmission" + index }
+                      },
+                      [_vm._v(_vm._s(filter.transmission_type))]
+                    )
+                  ])
+                ]
+              )
             })
           ],
           2
@@ -44049,6 +44044,10 @@ var render = function() {
                     _vm._v(" "),
                     _c("p", { staticClass: "my-1" }, [
                       _vm._v("Fuel: " + _vm._s(item.fuel_type))
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "my-1" }, [
+                      _vm._v("Transmission: " + _vm._s(item.transmission_type))
                     ])
                   ])
                 ]

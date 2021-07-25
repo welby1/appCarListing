@@ -4,38 +4,32 @@
             <fieldset>
                 <div class="mt-4 space-y-4">
                     <legend class="text-base font-medium text-gray-900">Type</legend>
-                    <div class="flex items-start" v-for="(filter, index) in filters.body">
+                    <div class="flex items-start" v-for="(filter, index) in filters.body" :key="'filter_body'+index">
                         <div class="flex items-center h-5">
-                            <input :id="'filter'+index" :value="filter.body_type" v-model="selects.body" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                            <input :id="'filter_body'+index" :value="filter.body_type" v-model="selects.body" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
                         </div>
                         <div class="ml-3 text-sm">
-                            <label :for="'filter'+index" class="font-medium text-gray-700">
-                                {{filter.body_type}}
-                            </label>
+                            <label :for="'filter_body'+index" class="font-medium text-gray-700">{{filter.body_type}}</label>
                         </div>
                     </div> 
 
                     <legend class="text-base font-medium text-gray-900">Fuel</legend>
-                    <div class="flex items-start" v-for="(filter, index) in filters.fuel">
+                    <div class="flex items-start" v-for="(filter, index) in filters.fuel" :key="'filter_fuel'+index">
                         <div class="flex items-center h-5">
-                            <input :id="'filter'+index" :value="filter.fuel_type" v-model="selects.fuel" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                            <input :id="'filter_fuel'+index" :value="filter.fuel_type" v-model="selects.fuel" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
                         </div>
                         <div class="ml-3 text-sm">
-                            <label :for="'filter'+index" class="font-medium text-gray-700">
-                                {{filter.fuel_type}}
-                            </label>
+                            <label :for="'filter_fuel'+index" class="font-medium text-gray-700">{{filter.fuel_type}}</label>
                         </div>
                     </div>
 
                     <legend class="text-base font-medium text-gray-900">Transmission</legend>
-                    <div class="flex items-start" v-for="(filter, index) in filters.transmission">
+                    <div class="flex items-start" v-for="(filter, index) in filters.transmission" :key="'filter_transmission'+index">
                         <div class="flex items-center h-5">
-                            <input :id="'filter'+index" :value="filter.transmission_type" v-model="selects.transmission" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                            <input :id="'filter_transmission'+index" :value="filter.transmission_type" v-model="selects.transmission" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
                         </div>
                         <div class="ml-3 text-sm">
-                            <label :for="'filter'+index" class="font-medium text-gray-700">
-                                {{filter.transmission_type}}
-                            </label>
+                            <label :for="'filter_transmission'+index" class="font-medium text-gray-700">{{filter.transmission_type}}</label>
                         </div>
                     </div>
                 </div>
@@ -54,6 +48,7 @@
                         <p class="my-1">Price: {{formatPrice(item.price)}} $</p>
                         <p class="my-1">Type: {{item.body_type}}</p>
                         <p class="my-1">Fuel: {{item.fuel_type}}</p>
+                        <p class="my-1">Transmission: {{item.transmission_type}}</p>
                     </div>
                 </div>
             </div>
