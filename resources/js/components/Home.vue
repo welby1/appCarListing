@@ -34,7 +34,9 @@
                             <img src="http://unsplash.it/400/300" alt="Placeholder" class="w-full h-full object-cover object-center" />
                         </div>
                         <div class="p-4">
-                            <h5 class="text-2xl">{{item.make +' '+ item.model}}</h5>
+                            <router-link class="mr-4" :to="{ name: 'CarShow', params: { id: item.id }}">
+                                <h5 class="text-2xl">{{item.make +' '+ item.model}}</h5>
+                            </router-link>
                             <p class="my-1">Year: {{item.year}}</p>
                             <p class="my-1">Price: {{formatPrice(item.price)}} $</p>
                         </div>

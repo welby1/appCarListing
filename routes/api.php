@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Car;
+use App\Http\Controllers\Api\Car\CarController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -33,4 +35,6 @@ Route::get('latest-deals', function (){
 });
 
 Route::get('get-filters', [App\Http\Controllers\Api\Car\CarController::class, 'getFilters']);
-Route::post('cars', [App\Http\Controllers\Api\Car\CarController::class, 'index']);
+Route::post('load-cars', [App\Http\Controllers\Api\Car\CarController::class, 'loadCars']);
+
+Route::apiResource('cars', CarController::class);

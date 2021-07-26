@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\Car;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Resources\CarResource;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Car;
 
 class CarController extends Controller
@@ -23,12 +25,8 @@ class CarController extends Controller
         return response()->json($response);
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
+   
+    public function loadCars(Request $request)
     {
         $body = $request->body;
         $fuel = $request->fuel;
@@ -45,6 +43,12 @@ class CarController extends Controller
                 return $q->whereIn('transmission_type', $transmission);
             })
             ->orderBy('created_at', 'DESC')->paginate(9);
+    }
+    
+    public function index(){
+        $id = Auth::id();
+        return Car::where('user_id', '=', $id)->get();
+
     }
 
     /**
@@ -76,7 +80,8 @@ class CarController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Car::with(['photos','user'])->where('id','=', $id)->get();
+        return CarResource::collection($data);
     }
 
     /**

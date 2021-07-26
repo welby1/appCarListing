@@ -4,6 +4,7 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import NotFound from './components/NotFound';
+import CarShow from './components/Car/Show';
 
 
 export default{
@@ -31,6 +32,11 @@ export default{
             path: '/login',
             component: Login,
             name: 'Login'
+        },
+        {
+            path: '/api/cars/:id',
+            component: CarShow,
+            name: 'CarShow'
         },
         {
             path: "/dashboard",
