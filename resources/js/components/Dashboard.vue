@@ -11,8 +11,8 @@
                             <div class="flex items-center">
                                 <div class="flex-shrink-0">Car</div>
                                 <div class="ml-4">
-                                    <button @click.prevent="addCar" type="submit" class="py-0 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2">
-                                        New
+                                    <button type="submit" class="py-0 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2">
+                                        <router-link :to="{ name: 'CarCreate' }">New</router-link>
                                     </button>
                                 </div>
                             </div>
@@ -70,7 +70,11 @@ export default {
                 .then((res) => {
                     this.cars = res.data;
                 });
+        },
+        addCar(){
+            axios.get('/api/car/create');
         }
+
     },
     mounted(){
         axios.get('/api/user').then((response)=>{

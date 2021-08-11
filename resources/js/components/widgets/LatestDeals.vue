@@ -18,6 +18,11 @@ export default {
     },
     mounted(){
         this.latestDeals();
+
+        Echo.channel('car-created-channel')
+            .listen('CarCreated', (e) => {
+                console.log(e.message);
+            });
     },
     methods:{
          latestDeals(){

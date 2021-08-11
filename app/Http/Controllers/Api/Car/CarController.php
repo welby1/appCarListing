@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\CarResource;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Car;
+use App\Events\CarCreated;
 
 class CarController extends Controller
 {
@@ -69,7 +70,34 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'make' => ['required', 'string'],
+            'model' => ['required', 'string'],
+            'year' => ['required', 'digits:4'],
+            'body_type' => ['required', 'string', 'max:50'],
+            'fuel_type' => ['required', 'string', 'max:50'],
+            'engine_displ' => ['required', 'integer'],
+            'transmission_type' => ['required', 'string', 'max:50'],
+            'price' => ['required', 'numeric'],
+            'description' => ['required', 'string', 'max:255']
+        ]);
+
+        Car::create([
+            'make' => $request->make,
+            'model' => $request->model,
+            'year' => $request->year,
+            'body_type' => $request->body_type,
+            'fuel_type' => $request->fuel_type,
+            'engine_displ' => $request->engine_displ,
+            'transmission_type' => $request->transmission_type,
+            'price' => $request->price,
+            'description' => $request->description,
+            'user_id' => Auth::id()
+        ]);
+
+        event(new CarCreated('Event: car created'));
+
+        return 'successfull created';
     }
 
     /**
