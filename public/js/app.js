@@ -2648,6 +2648,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2655,17 +2660,20 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
+    var _this = this;
+
     this.latestDeals();
-    Echo.channel('car-created-channel').listen('CarCreated', function (e) {
-      console.log(e.message);
+    Echo.channel('car-created-channel').listen('CarCreated', function (event) {
+      //console.log(event.message);
+      _this.latestDeals();
     });
   },
   methods: {
     latestDeals: function latestDeals() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get('/api/latest-deals').then(function (res) {
-        _this.cars = res.data;
+        _this2.cars = res.data;
       });
     }
   }
@@ -52176,14 +52184,11 @@ var render = function() {
             key: car.id,
             staticClass: "col-span-1 row-span-1 rounded overflow-hidden"
           },
-          _vm._l(car.photos, function(img) {
-            return _c("img", {
-              key: img.id,
-              staticClass: "w-full object-cover object-center",
-              attrs: { src: img.img_path, alt: "Placeholder" }
-            })
-          }),
-          0
+          [
+            _c("p", { key: car.id }, [
+              _vm._v(_vm._s(car.make) + " " + _vm._s(car.model))
+            ])
+          ]
         )
       }),
       0

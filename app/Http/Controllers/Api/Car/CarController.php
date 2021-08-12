@@ -82,7 +82,7 @@ class CarController extends Controller
             'description' => ['required', 'string', 'max:255']
         ]);
 
-        Car::create([
+        $car = Car::create([
             'make' => $request->make,
             'model' => $request->model,
             'year' => $request->year,
@@ -95,7 +95,7 @@ class CarController extends Controller
             'user_id' => Auth::id()
         ]);
 
-        event(new CarCreated('Event: car created'));
+        event(new CarCreated($car));
 
         return 'successfull created';
     }

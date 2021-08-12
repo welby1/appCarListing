@@ -19,8 +19,8 @@ class CarCreated implements ShouldBroadcast
      *
      * @return void
      */
-    public string $message;
-    public function __construct(string $message)
+    public $message;
+    public function __construct($message)
     {
         $this->message = $message;
     }

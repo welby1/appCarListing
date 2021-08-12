@@ -31,7 +31,8 @@ Route::get('dropdown-data', [App\Http\Controllers\Api\HomeController::class, 'in
 Route::post('search-cars', [App\Http\Controllers\Api\HomeController::class, 'searchCars']);
 Route::post('load-models', [App\Http\Controllers\Api\HomeController::class, 'loadModels']);
 Route::get('latest-deals', function (){
-    return Car::with('photos')->orderBy('created_at', 'DESC')->take(4)->get();
+    //return Car::with('photos')->orderBy('created_at', 'DESC')->take(4)->get();
+    return Car::orderBy('created_at', 'DESC')->take(4)->get();
 });
 
 Route::get('get-filters', [App\Http\Controllers\Api\Car\CarController::class, 'getFilters']);
