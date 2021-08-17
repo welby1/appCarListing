@@ -6,6 +6,7 @@
                     <router-link class="mr-4" to='/' exact>Home</router-link>
                     <router-link class="mr-4" to='/cars'>Cars</router-link>
                     <router-link class="mr-4" to='/dashboard'>Dashboard</router-link>
+                    <router-link class="mr-4" to='/message'>Chat</router-link>
                 </div>
                 <div class="flex">
                     <router-link v-if="auth==0" class="mr-4" to='/login' exact>Login</router-link>

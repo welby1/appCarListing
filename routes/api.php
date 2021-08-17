@@ -22,6 +22,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->get('/authenticated', function () {
     return true;
 });
+Route::middleware('auth:sanctum')->get('/user', function(){
+    return Auth::user();
+});
 
 Route::post('register', [App\Http\Controllers\Api\Auth\RegisterController::class, 'register']);
 Route::post('login', [App\Http\Controllers\Api\Auth\LoginController::class, 'login']);
@@ -31,11 +34,12 @@ Route::get('dropdown-data', [App\Http\Controllers\Api\HomeController::class, 'in
 Route::post('search-cars', [App\Http\Controllers\Api\HomeController::class, 'searchCars']);
 Route::post('load-models', [App\Http\Controllers\Api\HomeController::class, 'loadModels']);
 Route::get('latest-deals', function (){
-    //return Car::with('photos')->orderBy('created_at', 'DESC')->take(4)->get();
-    return Car::orderBy('created_at', 'DESC')->take(4)->get();
+    return Car::with('photos')->orderBy('created_at', 'DESC')->take(4)->get();
 });
 
 Route::get('get-filters', [App\Http\Controllers\Api\Car\CarController::class, 'getFilters']);
 Route::post('load-cars', [App\Http\Controllers\Api\Car\CarController::class, 'loadCars']);
 
 Route::apiResource('cars', CarController::class);
+
+Route::post('message', [App\Http\Controllers\Api\Chat\MessageController::class, 'broadcast']);

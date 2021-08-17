@@ -6,6 +6,7 @@ import Dashboard from './components/Dashboard';
 import NotFound from './components/NotFound';
 import CarShow from './components/Car/Show';
 import CarCreate from './components/Car/Create';
+import Chat from './components/Chat/Chat';
 
 
 export default{
@@ -43,6 +44,11 @@ export default{
             path: '/api/cars/create',
             component: CarCreate,
             name: 'CarCreate'
+        },
+        {
+            path: '/message',
+            component: Chat,
+            name: 'Chat'
         },
         {
             path: "/dashboard",

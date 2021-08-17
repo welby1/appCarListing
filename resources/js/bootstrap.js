@@ -41,4 +41,5 @@ window.Echo = new Echo({
     forceTLS: false,
     wsPort: 6001,
     disableStats: true
+    //authEndpoint: '/api/broadcasting/auth',
 });

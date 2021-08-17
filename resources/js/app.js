@@ -12,6 +12,8 @@ Vue.use(TailablePagination);
 
 Vue.component('content-view', require('./components/ContentView.vue').default);
 Vue.component('latest-deals', require('./components/widgets/LatestDeals.vue').default);
+Vue.component('my-message', require('./components/chat/MyMessage.vue').default);
+Vue.component('message', require('./components/Chat/Message.vue').default);
 
 const app = new Vue({
     el: '#app',
