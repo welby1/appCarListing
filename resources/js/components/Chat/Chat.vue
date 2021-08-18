@@ -46,7 +46,7 @@ export default {
 
        this.getUser();
 
-        Echo.channel('chat')
+        Echo.private('chat')
             .listen('NewChatMessage', (e) => {
                 if(e.userId != this.userId) {
                     this.messages.push({
@@ -59,24 +59,26 @@ export default {
 
     },
     methods: {
-        sendMessage() {            
-            axios.post(`/api/message`, {
-                text: this.newMessage,
-                userId: this.userId,
-                userName: this.userName
-            })
-            .then((response) => {
-                this.messages.push({
+        sendMessage() {  
+            if(this.userId != ''){
+                axios.post(`/api/message`, {
                     text: this.newMessage,
                     userId: this.userId,
                     userName: this.userName
+                })
+                .then((response) => {
+                    this.messages.push({
+                        text: this.newMessage,
+                        userId: this.userId,
+                        userName: this.userName
+                    });
+                    
+                    this.newMessage = '';
+                })
+                .catch((error) => {
+                    console.log(error);
                 });
-                
-                this.newMessage = '';
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+            }
         },
 
         getUser(){

@@ -48,7 +48,15 @@ export default{
         {
             path: '/message',
             component: Chat,
-            name: 'Chat'
+            name: 'Chat',
+            beforeEnter: (to, form, next) =>{
+                axios.get('/api/authenticated')
+                .then(()=>{
+                    next();
+                }).catch(()=>{
+                    return next({ name: 'Login'});
+                })
+            }
         },
         {
             path: "/dashboard",

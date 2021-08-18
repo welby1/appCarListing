@@ -2273,7 +2273,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     this.getUser();
-    Echo.channel('chat').listen('NewChatMessage', function (e) {
+    Echo["private"]('chat').listen('NewChatMessage', function (e) {
       if (e.userId != _this.userId) {
         _this.messages.push({
           text: e.text,
@@ -2287,21 +2287,23 @@ __webpack_require__.r(__webpack_exports__);
     sendMessage: function sendMessage() {
       var _this2 = this;
 
-      axios.post("/api/message", {
-        text: this.newMessage,
-        userId: this.userId,
-        userName: this.userName
-      }).then(function (response) {
-        _this2.messages.push({
-          text: _this2.newMessage,
-          userId: _this2.userId,
-          userName: _this2.userName
-        });
+      if (this.userId != '') {
+        axios.post("/api/message", {
+          text: this.newMessage,
+          userId: this.userId,
+          userName: this.userName
+        }).then(function (response) {
+          _this2.messages.push({
+            text: _this2.newMessage,
+            userId: _this2.userId,
+            userName: _this2.userName
+          });
 
-        _this2.newMessage = '';
-      })["catch"](function (error) {
-        console.log(error);
-      });
+          _this2.newMessage = '';
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
     },
     getUser: function getUser() {
       var _this3 = this;
@@ -2976,7 +2978,16 @@ __webpack_require__.r(__webpack_exports__);
   }, {
     path: '/message',
     component: _components_Chat_Chat__WEBPACK_IMPORTED_MODULE_8__.default,
-    name: 'Chat'
+    name: 'Chat',
+    beforeEnter: function beforeEnter(to, form, next) {
+      axios.get('/api/authenticated').then(function () {
+        next();
+      })["catch"](function () {
+        return next({
+          name: 'Login'
+        });
+      });
+    }
   }, {
     path: "/dashboard",
     name: "Dashboard",
