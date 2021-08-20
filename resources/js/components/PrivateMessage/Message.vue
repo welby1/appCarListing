@@ -1,13 +1,17 @@
 <template>
-    <div>
-        <div>
-            <ul class="grid grid-cols-1">
-                <li class="col-span-1" v-for="(item, index) in messages" :key="index">{{ item.body }}</li>
-            </ul>
+    <div class="w-2/4 mx-auto">
+        <div class="grid grid-cols-2">
+            <div v-for="(item, index) in messages" :key="index" :class="(item.sender_id == recipient_id) ? 'col-span-2' : 'col-span-1 col-start-2 text-right'">
+                <div class="mb-4 px-3.5 rounded-lg shadow break-all whitespace-normal" :class="(item.sender_id == recipient_id) ? 'bg-gray-200 notification' : 'bg-green-200'">{{ item.body }}</div>
+            </div>
         </div>
 
         <form @submit.prevent="sendMessage">
-            <input type="text" v-model="newMessage" class="shadow appearance-none border rounded w-3/12 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <div class="grid grid-cols-12 auto-cols-auto">
+                <div class="col-span-12">
+                    <input type="text" v-model="newMessage" class="py-4 pl-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md filter drop-shadow">
+                </div>
+            </div>
         </form>
     </div>
 </template>
@@ -69,6 +73,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+    .notification {
+        max-width: 80%;
+    }
 </style>

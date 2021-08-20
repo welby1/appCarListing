@@ -1,5 +1,5 @@
 <?php
-
+use App\Models\Message;
 use Illuminate\Support\Facades\Broadcast;
 
 /*
@@ -27,6 +27,3 @@ Broadcast::channel('message-{conversation_id}', function ($user, $conversation_i
     ->orWhere('sender_id','=', $user->id)
     ->orWhere('recipient_id','=', $user->id);
 });
-
-// todo.  1 write to 3 (3 get real time messages)
-//        when 3 write to 1 (1 doesnt get real time messages from 3) (plus user 3 get his mesaages twice... todo use toOthers() )

@@ -28,7 +28,7 @@ class MessageController extends Controller
             'subject_id' => $request->subject_id
         ]);
 
-        event(new NewPrivateMessage($message));
+        broadcast(new NewPrivateMessage($message))->toOthers();
 
         return response()->json($message, 200);
     }
