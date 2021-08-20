@@ -43,3 +43,6 @@ Route::post('load-cars', [App\Http\Controllers\Api\Car\CarController::class, 'lo
 Route::apiResource('cars', CarController::class);
 
 Route::post('message', [App\Http\Controllers\Api\Chat\MessageController::class, 'broadcast']);
+Route::post('message/conversation/{conversation_id}', [App\Http\Controllers\Api\PrivateMessage\MessageController::class, 'sendMessage']);
+Route::post('messages', [App\Http\Controllers\Api\PrivateMessage\MessageController::class, 'getMessages']);
+Route::get('user/conversations', [App\Http\Controllers\Api\PrivateMessage\MessageController::class, 'getConversations']);

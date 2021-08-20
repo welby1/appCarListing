@@ -24,7 +24,8 @@
                         type="text" 
                         v-model="newMessage" 
                         class="py-4 pl-3 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md filter drop-shadow" 
-                        placeholder="Type a message">
+                        placeholder="Type a message" 
+                        :disabled="userId ? false : true">
                 </div>
             </div>
         </form>

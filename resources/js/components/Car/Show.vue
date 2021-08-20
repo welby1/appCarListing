@@ -13,6 +13,9 @@
                 <p class="my-1">Name: {{item.user.name}}</p>
                 <p class="my-1">Email: {{(item.user.email)}}</p>
                 <p class="my-1">Phone: {{item.user.phone_number}}</p>
+                <router-link v-if="currentUserId != item.user.id" class="mt-2" :to="{ name: 'PrivateMessage', params: { from: currentUserId, to: item.user.id, car: item.id }}">
+                    <h5 class="text-xl">Send Message</h5>
+                </router-link> 
             </div>
         </div>
         <div class="grid grid-cols-2 col-span-5 row-start-3 row-span-1 p-4 w-full overflow-hidden">
@@ -36,9 +39,11 @@ export default {
     data(){
         return{
             car: [],
+            currentUserId: ''
         }
     },
     mounted(){
+        this.getUser();
         this.loadCar();
     },
     methods:{
@@ -50,6 +55,12 @@ export default {
         formatPrice(value) {
             let val = (value/1).toFixed(0).replace('.', ',')
             return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+        },
+        getUser(){
+            axios.get('/api/user')
+            .then((response) =>{
+                this.currentUserId = response.data.id;
+            });
         }
     }
 }
