@@ -1885,7 +1885,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       auth: 0,
-      user: ''
+      user: '',
+      userId: ''
     };
   },
   mounted: function mounted() {
@@ -1894,6 +1895,7 @@ __webpack_require__.r(__webpack_exports__);
     this.checkAuth();
     axios.get('/api/user').then(function (response) {
       _this.user = response.data;
+      _this.userId = response.data.id;
     });
   },
   methods: {
@@ -2728,7 +2730,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['conversation', 'sender', 'subject', 'recipient']
+  props: ['conversation', 'sender', 'subject', 'recipient'],
+  data: function data() {
+    return {
+      notifications: '',
+      conversation_id: '' // DONE when broadcast message then notification updates count of unread messages to the correct conversation
+      // todo mark READ notifications when notified user checked messages in room
+      // todo on page load to get counted messages for each dialog
+
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    Echo["private"]("App.Models.User.".concat(this.$route.params.userId)).notification(function (notification) {
+      _this.notifications = _this.compareConversations(notification);
+    });
+  },
+  methods: {
+    compareConversations: function compareConversations(notification) {
+      if (this.conversation == notification.data.data.conversation_id) {
+        this.conversation_id = notification.data.data.conversation_id;
+        return notification;
+      }
+    }
+  }
 });
 
 /***/ }),
@@ -2788,12 +2814,6 @@ __webpack_require__.r(__webpack_exports__);
     sendMessage: function sendMessage() {
       var _this2 = this;
 
-      /*              buyer       seller
-      sender_id           1       3
-      recipient_id        3       1
-      subject_id          38      38
-      conversation_id     1338    1338
-        */
       axios.post("/api/message/conversation/".concat(this.conversation_id), {
         message: this.newMessage,
         sender_id: this.sender_id,
@@ -2868,6 +2888,9 @@ __webpack_require__.r(__webpack_exports__);
     this.getMessages();
     Echo["private"]("message-".concat(this.conversation_id)).listen('NewPrivateMessage', function (e) {
       _this.messages.push(e.message);
+    });
+    Echo["private"]("App.Models.User.".concat(this.sender_id)).notification(function (notification) {
+      console.log(notification.count);
     });
   },
   methods: {
@@ -3264,7 +3287,7 @@ __webpack_require__.r(__webpack_exports__);
     component: _components_PrivateMessage_Message__WEBPACK_IMPORTED_MODULE_9__.default,
     name: 'PrivateMessage'
   }, {
-    path: '/my/messages',
+    path: '/user/:userId/messages',
     component: _components_PrivateMessage_MyMessages__WEBPACK_IMPORTED_MODULE_10__.default,
     name: 'MyMessages'
   }, {
@@ -51448,7 +51471,12 @@ var render = function() {
                                     {
                                       staticClass:
                                         "rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap",
-                                      attrs: { to: { name: "MyMessages" } }
+                                      attrs: {
+                                        to: {
+                                          name: "MyMessages",
+                                          params: { userId: this.userId }
+                                        }
+                                      }
                                     },
                                     [
                                       _vm._v(
@@ -53367,6 +53395,11 @@ var render = function() {
                 },
                 [_vm._v("From " + _vm._s(_vm.sender))]
               ),
+              _vm.conversation == _vm.conversation_id
+                ? _c("small", [
+                    _vm._v("(" + _vm._s(_vm.notifications.count) + ")")
+                  ])
+                : _vm._e(),
               _c("br"),
               _vm._v("\n            " + _vm._s(_vm.subject) + "\n        ")
             ]

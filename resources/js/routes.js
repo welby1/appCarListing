@@ -67,7 +67,7 @@ export default{
             name: 'PrivateMessage'
         },
         {
-            path: '/my/messages',
+            path: '/user/:userId/messages',
             component: MyMessages,
             name: 'MyMessages'
         },

@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\Message;
+use App\Models\User;
 use App\Events\NewPrivateMessage;
+use App\Notifications\NewPrivateMessage as NewPrivateMessageNotification;
 
 class MessageController extends Controller
 {
@@ -28,7 +30,14 @@ class MessageController extends Controller
             'subject_id' => $request->subject_id
         ]);
 
+        // broadcast new message
         broadcast(new NewPrivateMessage($message))->toOthers();
+
+        // send notification to recipient
+        $userToNotify = User::find($request->recipient_id);
+        $sender = User::find($request->sender_id);
+        $userToNotify->notify(new NewPrivateMessageNotification($userToNotify, $sender, $request->conversation_id));
+
 
         return response()->json($message, 200);
     }
@@ -37,10 +46,6 @@ class MessageController extends Controller
         return Message::where('conversation_id', 'like', $request->conversation_id)
             ->orderBy('created_at', 'ASC')
             ->get();
-
-        // return response()->json([
-        //     'message' => $massages,
-        // ], 200);
     }
 
     public function getConversations(){
@@ -49,6 +54,8 @@ class MessageController extends Controller
             ->where('recipient_id', Auth::id())
             ->groupBy('conversation_id','sender_id', 'subject_id', 'recipient_id')
             ->get();
+
+        
 
         // $conversations = Message::selectRaw('conversation_id, sender_id, max(created_at) as created_at')
         // ->where('recipient_id', Auth::id())

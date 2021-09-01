@@ -34,6 +34,11 @@ export default {
             .listen('NewPrivateMessage', (e) => {
                 this.messages.push(e.message);
             });
+        
+        Echo.private(`App.Models.User.${this.sender_id}`)
+            .notification((notification) => {
+                console.log(notification.count);
+            });
     },
     methods:{
         sendMessage(){

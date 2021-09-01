@@ -40,13 +40,6 @@ export default {
     },
     methods:{
         sendMessage(){
-            /*              buyer       seller
-            sender_id           1       3
-            recipient_id        3       1
-            subject_id          38      38
-            conversation_id     1338    1338
-
-            */
             axios.post(`/api/message/conversation/${this.conversation_id}`, {
                 message: this.newMessage,
                 sender_id: this.sender_id,
