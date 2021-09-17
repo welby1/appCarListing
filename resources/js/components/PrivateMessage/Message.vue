@@ -29,7 +29,7 @@ export default {
         }
     },
     beforeMount(){
-        this.conversation_id = this.sender_id + this.recipient_id + this.subject_id;
+        this.conversation_id = this.sender_id.toString() + this.recipient_id.toString() + this.subject_id.toString();
     },
     mounted(){
         this.getMessages();

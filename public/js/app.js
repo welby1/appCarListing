@@ -2729,29 +2729,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['conversation', 'sender', 'subject', 'recipient'],
+  props: ['conversation', 'sender', 'subject', 'recipient', 'unread'],
   data: function data() {
     return {
       notifications: '',
       conversation_id: '' // DONE when broadcast message then notification updates count of unread messages to the correct conversation
-      // todo mark READ notifications when notified user checked messages in room
-      // todo on page load to get counted messages for each dialog
+      // DONE mark READ notifications when notified user sends new messages in room
+      // DONE on page load to get counted messages for each dialog
+      // DONE scroll to the first unread user's message on mounted or to the end of page if there are no unseen messages
+      // todo on conversation page to display user_name, topic, last message
 
     };
   },
   mounted: function mounted() {
     var _this = this;
 
+    this.notifications = this.unread;
+    this.conversation_id = this.conversation;
     Echo["private"]("App.Models.User.".concat(this.$route.params.userId)).notification(function (notification) {
-      _this.notifications = _this.compareConversations(notification);
+      _this.notifications = _this.incrUnread(notification);
     });
   },
   methods: {
-    compareConversations: function compareConversations(notification) {
+    incrUnread: function incrUnread(notification) {
       if (this.conversation == notification.data.data.conversation_id) {
-        this.conversation_id = notification.data.data.conversation_id;
-        return notification;
+        return notification.count;
+      } else {
+        return this.notifications = this.notifications;
       }
     }
   }
@@ -2800,7 +2807,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   beforeMount: function beforeMount() {
-    this.conversation_id = this.sender_id + this.recipient_id + this.subject_id;
+    this.conversation_id = this.sender_id.toString() + this.recipient_id.toString() + this.subject_id.toString();
   },
   mounted: function mounted() {
     var _this = this;
@@ -2879,13 +2886,18 @@ __webpack_require__.r(__webpack_exports__);
       conversation_id: this.$route.params.conversation,
       sender_id: this.$route.params.recipient,
       recipient_id: this.$route.params.sender,
-      subject_id: this.$route.params.subject
+      subject_id: this.$route.params.subject,
+      messageToScroll: ''
     };
   },
   mounted: function mounted() {
     var _this = this;
 
-    this.getMessages();
+    this.getMessages(); // timeout needs to work scroll event
+
+    setTimeout(function () {
+      _this.scrollToMessage(_this.messageToScroll);
+    }, 500);
     Echo["private"]("message-".concat(this.conversation_id)).listen('NewPrivateMessage', function (e) {
       _this.messages.push(e.message);
     });
@@ -2917,7 +2929,27 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/api/messages', {
         conversation_id: this.conversation_id
       }).then(function (response) {
-        _this3.messages = response.data;
+        var _response$data$messag;
+
+        _this3.messages = response.data.messages;
+        _this3.messageToScroll = (_response$data$messag = response.data.messageToScroll) !== null && _response$data$messag !== void 0 ? _response$data$messag : null;
+      });
+    },
+    scrollToMessage: function scrollToMessage(messageToScroll) {
+      // if there are not unseen messages for user then scrolling page to the end
+      if (!messageToScroll) {
+        var _el = document.getElementsByTagName('form')[0];
+        return _el.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      } // scrolling to the first unseen message
+
+
+      var el = document.getElementById(messageToScroll);
+      return el.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
       });
     }
   }
@@ -2936,6 +2968,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
 //
 //
 //
@@ -53395,11 +53428,11 @@ var render = function() {
                 },
                 [_vm._v("From " + _vm._s(_vm.sender))]
               ),
-              _vm.conversation == _vm.conversation_id
-                ? _c("small", [
-                    _vm._v("(" + _vm._s(_vm.notifications.count) + ")")
-                  ])
+              _vm._v(" "),
+              _vm.conversation == _vm.conversation_id && _vm.notifications
+                ? _c("small", [_vm._v("(" + _vm._s(_vm.notifications) + ")")])
                 : _vm._e(),
+              _vm._v(" "),
               _c("br"),
               _vm._v("\n            " + _vm._s(_vm.subject) + "\n        ")
             ]
@@ -53542,7 +53575,8 @@ var render = function() {
             class:
               item.sender_id == _vm.recipient_id
                 ? "col-span-2"
-                : "col-span-1 col-start-2 text-right"
+                : "col-span-1 col-start-2 text-right",
+            attrs: { id: item.id }
           },
           [
             _c(
@@ -53642,7 +53676,8 @@ var render = function() {
                 conversation: item.conversation_id,
                 sender: item.sender_id,
                 subject: item.subject_id,
-                recipient: item.recipient_id
+                recipient: item.recipient_id,
+                unread: item.unread
               }
             })
           ],

@@ -18,17 +18,19 @@ class NewPrivateMessage extends Notification implements ShouldBroadcast
     public $toNotify;
     public $sender;
     public $conversation_id;
+    public $message_id;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($toNotify, User $sender, $conversation_id)
+    public function __construct($toNotify, User $sender, $conversation_id, $message_id)
     {
         $this->toNotify = $toNotify;
         $this->sender = $sender;
         $this->conversation_id = $conversation_id;
+        $this->message_id = $message_id;
     }
 
     /**
@@ -73,6 +75,7 @@ class NewPrivateMessage extends Notification implements ShouldBroadcast
             'to' => $notifiable->id,
             'from' => $this->sender->id,
             'conversation_id' => $this->conversation_id,
+            'message_id' => $this->message_id
         ];
     }
 }

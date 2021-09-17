@@ -6,7 +6,8 @@
                 :conversation="item.conversation_id"
                 :sender="item.sender_id"
                 :subject="item.subject_id"
-                :recipient="item.recipient_id">
+                :recipient="item.recipient_id"
+                :unread="item.unread">
             </conversation>
         </div>
     </div>
