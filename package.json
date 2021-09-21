@@ -31,6 +31,8 @@
     "dependencies": {
         "tailable-pagination": "^0.1.22",
         "tailwind": "^4.0.0",
-        "vue-router": "^3.5.2"
+        "vue-router": "^3.5.2",
+        "vuex": "^3.6.2",
+        "vuex-persistedstate": "^4.0.0"
     }
 }

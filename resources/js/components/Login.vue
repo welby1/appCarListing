@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
     data(){
         return{
@@ -32,13 +34,16 @@ export default {
         }
     },
     methods:{
-         loginUser(){
-             axios.post('/api/login', this.form).then(() =>{
-                 this.$router.push({ name: "Dashboard"}); 
-             }).catch((error) =>{
+        ...mapActions('user', ['userLoggedIn', 'setUserData']),
+        loginUser(){
+            axios.post('/api/login', this.form).then(() =>{
+                this.userLoggedIn();
+                this.setUserData();
+                this.$router.push({ name: "Dashboard"}); 
+            }).catch((error) =>{
                 this.errors = error.response.data.errors;
             })
-         }
+        }
     }
 }
 </script>

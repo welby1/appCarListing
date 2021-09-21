@@ -1,6 +1,7 @@
 require('./bootstrap');
 import App from './components/App';
 import TailablePagination from 'tailable-pagination';
+import { store } from './store';
 
 window.Vue = require('vue').default;
 
@@ -18,6 +19,7 @@ Vue.component('conversation', require('./components/PrivateMessage/Conversation.
 
 const app = new Vue({
     el: '#app',
+    store,
     render(h) { return h(App) },
     router: new VueRouter(routes)
 });
