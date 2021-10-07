@@ -21,7 +21,11 @@
 </head>
 <body>
     <div id="app">
-        @yield('content')
+        @if(Auth::check())
+            <app :status=1 :user="{{ Auth::user()}}"></app>
+        @else
+            <app :status=0 :user=null></app>
+        @endif
     </div>
 </body>
 </html>

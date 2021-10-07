@@ -16,10 +16,17 @@ Vue.component('latest-deals', require('./components/widgets/LatestDeals.vue').de
 Vue.component('my-message', require('./components/chat/MyMessage.vue').default);
 Vue.component('message', require('./components/Chat/Message.vue').default);
 Vue.component('conversation', require('./components/PrivateMessage/Conversation.vue').default);
+Vue.component('app', require('./components/App.vue').default);
 
 const app = new Vue({
     el: '#app',
     store,
-    render(h) { return h(App) },
+    // render(h) { 
+    //     return h(App, {
+    //         props: {
+    //             user: ''
+    //         }
+    //     })
+    // },
     router: new VueRouter(routes)
 });

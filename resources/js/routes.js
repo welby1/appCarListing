@@ -11,6 +11,7 @@ import PrivateMessage from './components/PrivateMessage/Message';
 import MyMessages from './components/PrivateMessage/MyMessages';
 import MyMessage from './components/PrivateMessage/MyMessage';
 
+import { store } from './store';
 
 export default{
     mode: 'history',
@@ -57,6 +58,7 @@ export default{
                 .then(()=>{
                     next();
                 }).catch(()=>{
+                    store.dispatch('user/userLoggedOut');
                     return next({ name: 'Login'});
                 })
             }
@@ -85,11 +87,11 @@ export default{
                 .then(()=>{
                     next();
                 }).catch(()=>{
+                    store.dispatch('user/userLoggedOut');
                     return next({ name: 'Login'});
                 })
             }
-       
-          }
+        }
           
     ]
 }

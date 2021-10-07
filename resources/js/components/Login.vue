@@ -34,12 +34,13 @@ export default {
         }
     },
     methods:{
-        ...mapActions('user', ['userLoggedIn', 'setUserData']),
+        ...mapActions('user', ['userLoggedIn', 'userLoggedOut']),
         loginUser(){
             axios.post('/api/login', this.form).then(() =>{
+                this.userLoggedOut();
                 this.userLoggedIn();
-                this.setUserData();
                 this.$router.push({ name: "Dashboard"}); 
+
             }).catch((error) =>{
                 this.errors = error.response.data.errors;
             })

@@ -7,16 +7,12 @@ export const user =  {
         userData: null
     }),
     mutations: {
-        USER_LOGGED_IN(state){
+        USER_LOGGED_IN(state, user){
             state.status = 1;
+            state.userData = user;
         },
         USER_LOGGED_OUT(state){
             state.status = 0;
-        },
-        SET_USER_DATA(state, user){
-            state.userData = user;
-        },
-        DELETE_USER_DATA(state){
             state.userData = null;
         }
     },
@@ -30,18 +26,13 @@ export const user =  {
     },
     actions: {
         userLoggedIn({ commit }){
-            commit('USER_LOGGED_IN');
+            axios.get('/api/user').then((response)=>{
+                commit('USER_LOGGED_IN', response.data);
+            });
         },
         userLoggedOut({ commit }){
             commit('USER_LOGGED_OUT');
-        },
-        setUserData({ commit }){
-            axios.get('/api/user').then((response)=>{
-                commit('SET_USER_DATA', response.data);
-            });
-        },
-        deleteUserData({ commit }){
-            commit('DELETE_USER_DATA');
+            window.localStorage.removeItem('vuex');
         }
 
     }

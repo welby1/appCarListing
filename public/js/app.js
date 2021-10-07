@@ -1890,11 +1890,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['status', 'user'],
   data: function data() {
     return {};
   },
-  mounted: function mounted() {},
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('user', ['userLoggedOut', 'deleteUserData'])), {}, {
+  mounted: function mounted() {
+    this.user = this.getUserData;
+    this.status = this.getUserStatus;
+  },
+  created: function created() {
+    if (this.status == 0) {
+      this.userLoggedOut();
+    }
+  },
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('user', ['userLoggedOut'])), {}, {
     // should be used Vuex :) DONE
     logout: function logout() {
       var _this = this;
@@ -1902,15 +1911,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       axios.post('/api/logout').then(function () {
         _this.userLoggedOut();
 
-        _this.deleteUserData();
-
         _this.$router.push({
           name: "Home"
         });
       });
     }
   }),
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('user', ['getUserStatus', 'getUserData']))
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('user', ['getUserStatus', 'getUserData'])),
+  watch: {
+    getUserData: function getUserData(value) {
+      this.user = value;
+    },
+    getUserStatus: function getUserStatus(value) {
+      this.status = value;
+    }
+  }
 });
 
 /***/ }),
@@ -2157,6 +2172,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2193,15 +2215,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      car: [],
-      currentUserId: ''
+      car: []
     };
   },
   mounted: function mounted() {
-    this.getUser();
     this.loadCar();
   },
   methods: {
@@ -2215,15 +2236,9 @@ __webpack_require__.r(__webpack_exports__);
     formatPrice: function formatPrice(value) {
       var val = (value / 1).toFixed(0).replace('.', ',');
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-    },
-    getUser: function getUser() {
-      var _this2 = this;
-
-      axios.get('/api/user').then(function (response) {
-        _this2.currentUserId = response.data.id;
-      });
     }
-  }
+  },
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('user', ['getUserData']))
 });
 
 /***/ }),
@@ -2453,7 +2468,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      user: '',
       cars: []
     };
   },
@@ -2470,11 +2484,6 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    var _this2 = this;
-
-    axios.get('/api/user').then(function (response) {
-      _this2.user = response.data.id;
-    });
     this.userCarList();
   }
 });
@@ -2673,14 +2682,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       errors: []
     };
   },
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('user', ['userLoggedIn', 'setUserData'])), {}, {
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)('user', ['userLoggedIn', 'userLoggedOut'])), {}, {
     loginUser: function loginUser() {
       var _this = this;
 
       axios.post('/api/login', this.form).then(function () {
-        _this.userLoggedIn();
+        _this.userLoggedOut();
 
-        _this.setUserData();
+        _this.userLoggedIn();
 
         _this.$router.push({
           name: "Dashboard"
@@ -3187,12 +3196,17 @@ Vue.component('latest-deals', __webpack_require__(/*! ./components/widgets/Lates
 Vue.component('my-message', __webpack_require__(/*! ./components/chat/MyMessage.vue */ "./resources/js/components/chat/MyMessage.vue").default);
 Vue.component('message', __webpack_require__(/*! ./components/Chat/Message.vue */ "./resources/js/components/Chat/Message.vue").default);
 Vue.component('conversation', __webpack_require__(/*! ./components/PrivateMessage/Conversation.vue */ "./resources/js/components/PrivateMessage/Conversation.vue").default);
+Vue.component('app', __webpack_require__(/*! ./components/App.vue */ "./resources/js/components/App.vue").default);
 var app = new Vue({
   el: '#app',
   store: _store__WEBPACK_IMPORTED_MODULE_2__.store,
-  render: function render(h) {
-    return h(_components_App__WEBPACK_IMPORTED_MODULE_0__.default);
-  },
+  // render(h) { 
+  //     return h(App, {
+  //         props: {
+  //             user: ''
+  //         }
+  //     })
+  // },
   router: new vue_router__WEBPACK_IMPORTED_MODULE_4__.default(_routes__WEBPACK_IMPORTED_MODULE_3__.default)
 });
 
@@ -3273,6 +3287,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_PrivateMessage_Message__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/PrivateMessage/Message */ "./resources/js/components/PrivateMessage/Message.vue");
 /* harmony import */ var _components_PrivateMessage_MyMessages__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/PrivateMessage/MyMessages */ "./resources/js/components/PrivateMessage/MyMessages.vue");
 /* harmony import */ var _components_PrivateMessage_MyMessage__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/PrivateMessage/MyMessage */ "./resources/js/components/PrivateMessage/MyMessage.vue");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
+
 
 
 
@@ -3321,6 +3337,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/api/authenticated').then(function () {
         next();
       })["catch"](function () {
+        _store__WEBPACK_IMPORTED_MODULE_12__.store.dispatch('user/userLoggedOut');
         return next({
           name: 'Login'
         });
@@ -3346,6 +3363,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/api/authenticated').then(function () {
         next();
       })["catch"](function () {
+        _store__WEBPACK_IMPORTED_MODULE_12__.store.dispatch('user/userLoggedOut');
         return next({
           name: 'Login'
         });
@@ -3408,16 +3426,12 @@ var user = {
     };
   },
   mutations: {
-    USER_LOGGED_IN: function USER_LOGGED_IN(state) {
+    USER_LOGGED_IN: function USER_LOGGED_IN(state, user) {
       state.status = 1;
+      state.userData = user;
     },
     USER_LOGGED_OUT: function USER_LOGGED_OUT(state) {
       state.status = 0;
-    },
-    SET_USER_DATA: function SET_USER_DATA(state, user) {
-      state.userData = user;
-    },
-    DELETE_USER_DATA: function DELETE_USER_DATA(state) {
       state.userData = null;
     }
   },
@@ -3432,21 +3446,14 @@ var user = {
   actions: {
     userLoggedIn: function userLoggedIn(_ref) {
       var commit = _ref.commit;
-      commit('USER_LOGGED_IN');
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/user').then(function (response) {
+        commit('USER_LOGGED_IN', response.data);
+      });
     },
     userLoggedOut: function userLoggedOut(_ref2) {
       var commit = _ref2.commit;
       commit('USER_LOGGED_OUT');
-    },
-    setUserData: function setUserData(_ref3) {
-      var commit = _ref3.commit;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/user').then(function (response) {
-        commit('SET_USER_DATA', response.data);
-      });
-    },
-    deleteUserData: function deleteUserData(_ref4) {
-      var commit = _ref4.commit;
-      commit('DELETE_USER_DATA');
+      window.localStorage.removeItem('vuex');
     }
   }
 };
@@ -52591,7 +52598,7 @@ var render = function() {
                   _vm._v("Phone: " + _vm._s(item.user.phone_number))
                 ]),
                 _vm._v(" "),
-                _vm.currentUserId != item.user.id
+                _vm.getUserData.id != item.user.id
                   ? _c(
                       "router-link",
                       {
@@ -52600,7 +52607,7 @@ var render = function() {
                           to: {
                             name: "PrivateMessage",
                             params: {
-                              from: _vm.currentUserId,
+                              from: _vm.getUserData.id,
                               to: item.user.id,
                               car: item.id
                             }

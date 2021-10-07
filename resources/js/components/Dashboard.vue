@@ -60,7 +60,6 @@
 export default {
     data(){
         return{
-            user: '',
             cars: [],
         }
     },
@@ -74,12 +73,8 @@ export default {
         addCar(){
             axios.get('/api/car/create');
         }
-
     },
     mounted(){
-        axios.get('/api/user').then((response)=>{
-            this.user = response.data.id
-        });
         this.userCarList();
     }
 }

@@ -38,26 +38,41 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default{
+    props: ['status', 'user'],
     data(){
         return{
         }
     },
     mounted(){
+        this.user = this.getUserData;
+        this.status = this.getUserStatus;
+    },
+    created(){
+         if (this.status == 0) {
+            this.userLoggedOut();
+        }
     },
     methods:{
-        ...mapActions('user', ['userLoggedOut', 'deleteUserData']),
+        ...mapActions('user', ['userLoggedOut']),
 
          // should be used Vuex :) DONE
         logout(){
             axios.post('/api/logout').then(()=>{
                 this.userLoggedOut();
-                this.deleteUserData();
                 this.$router.push({ name: "Home"});
             })
         },
     },
     computed:{
-        ...mapGetters('user', ['getUserStatus', 'getUserData']),
+        ...mapGetters('user', ['getUserStatus', 'getUserData'])
+    },
+    watch:{
+        getUserData(value){
+            this.user = value;
+        },
+        getUserStatus(value){
+            this.status = value;
+        }
     }
 } 
 </script>
